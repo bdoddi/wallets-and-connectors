@@ -64,6 +64,7 @@ const WalletConnect = () => {
                     Switch to BSC Mainnet
                 </PrimaryButton>
             } */}
+            
         </>
     )
 }
