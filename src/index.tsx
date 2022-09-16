@@ -1,15 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Web3ReactProvider } from "@web3-react/core";
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Web3 from 'web3';
+import { web3 } from './helper/web3';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const getLibrary = (provider: any) => {
+  const library = new Web3(provider || web3.givenProvider);
+  // library.pollingInterval = 8000; // frequency provider is polling
+  return library;
+};
+
 root.render(
   <React.StrictMode>
-    <App />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <App />
+    </Web3ReactProvider>
   </React.StrictMode>
 );
 

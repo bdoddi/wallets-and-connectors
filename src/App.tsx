@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Metamask from './metamask/Metamask';
+import WalletConnect from './walletConnect/WalletConnect';
 
 function App() {
   return (
@@ -8,16 +10,18 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          React-typeScript-web3-tutorial
         </p>
-        <a
+        <Metamask />
+        <WalletConnect />
+        {/* <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> */}
       </header>
     </div>
   );
