@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+export const GridComponent = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: left;
+  @media only screen and (max-width: 400px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
 export const SubHeading = styled.h2`
   color: #61dafb;
 `;
@@ -12,8 +20,9 @@ export const PrimaryButton = styled.div`
   border-radius: 6px;
   color: black;
   cursor: pointer;
-  width: 300px;
+  width: 280px;
   &:hover {
-    font-size: 22px;
+    font-size: 20px;
   }
+  align-items: center;
 `;

@@ -4,7 +4,7 @@ import { tokenBalanceFunction } from '../helper/helper'
 import { NetworkName } from '../helper/networks'
 import { walletConnect } from '../helper/wallet'
 import { web3 } from '../helper/web3'
-import { PrimaryButton, SubHeading } from '../shared/styled'
+import { GridComponent, PrimaryButton, SubHeading } from '../shared/styled'
 import { connect, disconnect } from './web3Connection'
 
 const WalletConnect = () => {
@@ -54,35 +54,40 @@ const WalletConnect = () => {
     return (
         <>
             <SubHeading>Wallet-Connect (Trust Wallet) </SubHeading>
-            {/* Web3 Connection  */}
-            <PrimaryButton onClick={() => connectWalletConnect()}>
-                {address ? "Diconnect" : "Connect"} Web3 Wallet
-            </PrimaryButton>
-            {address && <i>Address : {address}</i>}
-            {address && <i>Network Name : {NetworkName(networkId)}</i>}
-            {address && <i>Chain ID: {networkId}</i>}
-            {address && <i>Balance: {balance}</i>}
-            {/* {
+            <GridComponent>
+                <div>
+                    {/* Web3 Connection  */}
+                    <PrimaryButton onClick={() => connectWalletConnect()}>
+                        {address ? "Diconnect" : "Connect"} Web3 Wallet
+                    </PrimaryButton>
+                    {address && <i>Address : {address}</i>}
+                    {address && <i>Network Name : {NetworkName(networkId)}</i>}
+                    {address && <i>Chain ID: {networkId}</i>}
+                    {address && <i>Balance: {balance}</i>}
+                    {/* {
                 address && <PrimaryButton onClick={() => connectWalletConnect()}>
                     Switch to BSC Mainnet
                 </PrimaryButton>
             } */}
-
-
-            {/* web3-react Connection */}
-            <PrimaryButton onClick={connectToWeb3React}>
-                {active ? "Diconnect" : "Connect"} Web3-React Wallet
-            </PrimaryButton>
-            {active && <i>Address : {account}</i>}
-            {active && chainId && <i>Network Name : {NetworkName(chainId)}</i>}
-            {active && <i>Chain ID: {chainId}</i>}
-            {active && <i>Balance: {balance}</i>}
-            {/* {
+                </div>
+                <div>
+                    {/* web3-react Connection */}
+                    <PrimaryButton onClick={connectToWeb3React}>
+                        {active && connector === walletConnect ? "Diconnect" : "Connect"} Web3-React Wallet
+                    </PrimaryButton>
+                    {connector === walletConnect && active && <>
+                        <i>Address : {account}</i> <br />
+                        {chainId && <i>Network Name : {NetworkName(chainId)}</i>} <br />
+                        <i>Chain ID: {chainId} </i> <br />
+                        <i>Balance: {balance}</i> <br />
+                    </>}
+                    {/* {
                 active && <PrimaryButton onClick={() => switchNetwork()}>
                     Switch to BSC Mainnet
                 </PrimaryButton>
             } */}
-
+                </div>
+            </GridComponent>
         </>
     )
 }

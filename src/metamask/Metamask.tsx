@@ -2,17 +2,21 @@ import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
 import { NetworkName } from '../helper/networks'
-import { SubHeading, PrimaryButton } from '../shared/styled'
+import { SubHeading, PrimaryButton, GridComponent } from '../shared/styled'
 import { walletType } from '../helper/typesOfWallets'
 import { connectWallet, disconnectWallet, returnNetworkId, switchNetwork } from './web3Connection'
 import { injected } from '../helper/wallet'
 import { tokenBalanceFunction } from '../helper/helper'
 import { web3 } from '../helper/web3'
+import { web3ModalConnect, web3ModalDisconnect } from './web3ModalConnection'
 
 const Metamask = () => {
-    const [address, setAddress] = useState('')
-    const [networkId, setNetworkId] = useState(0)
-    const [balance, setBalance] = useState('0.00')
+    const [address, setAddress] = useState<string>('')
+    const [networkId, setNetworkId] = useState<number>(0)
+    const [balance, setBalance] = useState<string>('0.00')
+    const [modalAddress, setModalAddress] = useState<string>('')
+    const [modalChainId, setModalChainId] = useState<number>(0)
+    const [modalProvider, setModalProvider] = useState<any>('')
     // const [clickedWeb]
 
     const { account, activate, deactivate, chainId, active, library, connector } = useWeb3React()
@@ -51,40 +55,78 @@ const Metamask = () => {
         }
     }, [account, library, address])
 
-    console.log("useWeb3React meta", ">>", connector, "<<", account, activate, deactivate, chainId, active, library)
-
-    return (
-        <>
-            <SubHeading>Metamask </SubHeading>
-            {/* Web3 Connection  */}
-            <PrimaryButton onClick={() => connectToWeb3(walletType[0])}>
-                {address ? "Diconnect" : "Connect"} Web3 Wallet
-            </PrimaryButton>
-            {address && <i>Address : {address}</i>}
-            {address && <i>Network Name : {NetworkName(networkId)}</i>}
-            {address && <i>Chain ID: {networkId}</i>}
-            {address && <i>Balance: {balance}</i>}
-            {
-                address && <PrimaryButton onClick={() => switchNetwork()}>
-                    Switch to BSC Mainnet
-                </PrimaryButton>
+    const connectToWeb3Modal = async () => {
+        if (!modalAddress) {
+            const accountDetails = await web3ModalConnect()
+            if (accountDetails) {
+                setModalAddress(accountDetails[0])
+                setModalChainId(accountDetails[1])
+                setModalProvider(accountDetails[3])
+                await fetchBalance(accountDetails[0], accountDetails[2])
             }
+            console.log("web3ModalConnect", accountDetails)
+        } else {
+            await web3ModalDisconnect(modalProvider)
+            setModalAddress('')
+            setModalChainId(0)
+            setModalProvider('')
+        }
+    }
 
-            {/* web3-react Connection */}
-            <PrimaryButton onClick={connectToWeb3React}>
-                {active ? "Diconnect" : "Connect"} Web3-React Wallet
-            </PrimaryButton>
-            {active && <i>Address : {account}</i>}
-            {active && chainId && <i>Network Name : {NetworkName(chainId)}</i>}
-            {active && <i>Chain ID: {chainId} </i>}
-            {active && <i>Balance: {balance}</i>}
-            {/* {
+    return (<>
+        <SubHeading>Metamask </SubHeading>
+        <GridComponent>
+            <div>
+                {/* Web3 Connection  */}
+                <PrimaryButton onClick={() => connectToWeb3(walletType[0])}>
+                    {address ? "Diconnect" : "Connect"} Web3 Wallet
+                </PrimaryButton>
+                {address && <>
+                    <i>Address : {account}</i> <br />
+                    {networkId && <i>Network Name : {NetworkName(networkId)}</i>} <br />
+                    <i>Chain ID: {networkId} </i> <br />
+                    <i>Balance: {balance}</i> <br />
+                </>}
+                {/* {
+                    address && <PrimaryButton onClick={() => switchNetwork()}>
+                        Switch to BSC Mainnet
+                    </PrimaryButton>
+                } */}
+            </div>
+            <div>
+                {/* web3-react Connection */}
+                <PrimaryButton onClick={connectToWeb3React}>
+                    {active && connector === injected ? "Diconnect" : "Connect"} Web3-React Wallet
+                </PrimaryButton>
+                {connector === injected && active && <>
+                    <i>Address : {account}</i> <br />
+                    {chainId && <i>Network Name : {NetworkName(chainId)}</i>} <br />
+                    <i>Chain ID: {chainId} </i> <br />
+                    <i>Balance: {balance}</i> <br />
+                </>}
+
+                {/* {
                 active && <PrimaryButton onClick={() => switchNetwork()}>
                     Switch to BSC Mainnet
                 </PrimaryButton>
             } */}
+            </div>
 
-        </>
+            <div>
+                {/* web3-Modal Connection */}
+                <PrimaryButton onClick={connectToWeb3Modal}>
+                    {modalAddress ? "Diconnect" : "Connect"} Web3-Modal Wallet
+                </PrimaryButton>
+                {modalAddress && <>
+                    <i>Address : {modalAddress}</i> <br />
+                    {modalChainId && <i>Network Name : {NetworkName(modalChainId)}</i>} <br />
+                    <i>Chain ID: {modalChainId} </i> <br />
+                    <i>Balance: {balance}</i> <br />
+                </>}
+            </div>
+
+        </GridComponent>
+    </>
     )
 }
 

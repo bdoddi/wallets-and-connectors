@@ -1,5 +1,10 @@
 import { useWeb3React } from "@web3-react/core";
-import { injected } from "../helper/wallet";
+
+
+
+//**Note : Web3-react code is integrated in main Component itself */
+
+
 
 // const switchNetwork = async () => {
 //   try {
