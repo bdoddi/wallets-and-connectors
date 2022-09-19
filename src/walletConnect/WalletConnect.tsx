@@ -53,7 +53,7 @@ const WalletConnect = () => {
 
     return (
         <>
-            <SubHeading>Wallet-Connect (Trust Wallet) </SubHeading>
+            <SubHeading>Wallet-Connect (Trust-Wallet) </SubHeading>
             <GridComponent>
                 <div>
                     {/* Web3 Connection  */}
