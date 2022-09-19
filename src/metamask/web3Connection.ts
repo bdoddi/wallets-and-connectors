@@ -1,5 +1,4 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { accountInfoInterface } from "../helper/interfaces";
 import { web3 } from "../helper/web3";
 
 // const accounts = await web3.eth.getAccounts()

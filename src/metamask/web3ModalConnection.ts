@@ -73,5 +73,5 @@ export const web3ModalDisconnect = async (provider: any) => {
     // });
 
     await provider._handleDisconnect();
-    const web3: any = new Web3(provider);
+    // const web3: any = new Web3(provider);
 };
