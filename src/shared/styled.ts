@@ -22,7 +22,7 @@ export const PrimaryButton = styled.div`
   border-radius: 6px;
   color: ${(props) => (props.color ? props.color : Colors.backgroundColor)};
   cursor: pointer;
-  width: 280px;
+  width: auto;
   font-weight: 500;
   &:hover {
     font-size: 20px;
@@ -33,3 +33,15 @@ export const PrimaryButton = styled.div`
 export const PrimarySpan = styled.span<PrimarySpanInterface>`
   color: ${(props) => (props.color ? props.color : Colors.primaryColor)};
 `;
+
+export const ComponentWrap = styled.div`
+border: 1px solid ${Colors.primaryColor};
+border-radius: 10px;
+padding: 20px;
+margin: 20px;
+box-shadow:0px 0px 10px 10px black;
+
+@media only screen and (max-width: 390px){
+  padding: 0px;
+}
+`

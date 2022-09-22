@@ -1,6 +1,6 @@
 import detectEthereumProvider from "@metamask/detect-provider";
-import { web3 } from "../helper/web3";
-import { setAccount } from "../logic/redux-toolkit/slices/web3WalletSlice";
+import { web3 } from "../../helper/web3";
+import { setAccount } from "../../logic/redux-toolkit/slices/web3WalletSlice";
 
 // const accounts = await web3.eth.getAccounts()
 // const balance = await web3.eth.getBalance(accounts[0])

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 
-import { NetworkName } from '../helper/networks'
-import { SubHeading, PrimaryButton, GridComponent } from '../shared/styled'
-import { walletType } from '../helper/typesOfWallets'
+import { NetworkName } from '../../helper/networks'
+import { SubHeading, PrimaryButton, GridComponent } from '../../shared/styled'
+import { walletType } from '../../helper/typesOfWallets'
 import { connectWallet, disconnectWallet, returnNetworkId } from './web3Connection'
-import { injected } from '../helper/wallet'
-import { tokenBalanceFunction } from '../helper/helper'
-import { web3 } from '../helper/web3'
+import { injected } from '../../helper/wallet'
+import { tokenBalanceFunction } from '../../helper/helper'
+import { web3 } from '../../helper/web3'
 import { web3ModalConnect, web3ModalDisconnect } from './web3ModalConnection'
-import { useDispatch, useSelector } from 'react-redux'
+import { useAppDispatch } from '../../hooks/useAppDispatch'
+import { useAppSelector } from '../../hooks/useAppSelector'
 
 const Metamask = () => {
     const [address, setAddress] = useState<string>('')
@@ -19,8 +20,8 @@ const Metamask = () => {
     const [modalChainId, setModalChainId] = useState<number>(0)
     const [modalProvider, setModalProvider] = useState<any>('')
 
-    const dispatch = useDispatch()
-    const { newAccount } = useSelector((state:any) => state.web3Wallet)
+    const dispatch = useAppDispatch()
+    const { newAccount } = useAppSelector((state: any) => state.web3Wallet)
 
     const { account, activate, deactivate, chainId, active, library, connector } = useWeb3React()
     console.log("newAccount", newAccount)

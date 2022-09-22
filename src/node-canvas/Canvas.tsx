@@ -49,9 +49,9 @@ const Canvas = () => {
         console.log('oh out')
 
     })
-
+    console.log("window.scrollX", window.screen.width)
     return (
-        <div>
+        <>
             <SubHeading color='white'> You can draw whatever you want. Happy Drawing.! </SubHeading>
             <PrimaryButton color={color === Colors.backgroundColor ? 'green' : Colors.backgroundColor}
              onClick={() => setColor(Colors.backgroundColor)} >Draw</PrimaryButton>
@@ -67,10 +67,10 @@ const Canvas = () => {
                 hideGrid={true}
                 loadTimeOffset={500}
                 lazyRadius={0}
-                canvasWidth={1000}
+                canvasWidth={window.screen.width <= 390 ? 330 : 400}
                 canvasHeight={400}
             />
-        </div>
+        </>
     )
 }
 

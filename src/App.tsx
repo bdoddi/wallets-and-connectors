@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import Metamask from './metamask/Metamask';
-import WalletConnect from './walletConnect/WalletConnect';
+import Metamask from './wallets/metamask/Metamask';
+import WalletConnect from './wallets/walletConnect/WalletConnect';
 import Canvas from './node-canvas/Canvas';
-import { PrimarySpan } from './shared/styled';
+import { ComponentWrap, PrimarySpan } from './shared/styled';
 
 function App() {
   return (
@@ -13,20 +13,24 @@ function App() {
         <i> Note:  The following are the list of Frameworks & Respected libraries involved in this template </i>
         <b>
           <p>
-            <PrimarySpan>React-typeScript-web3-setup</PrimarySpan> ( Libraries:  Web3.js, Web3-react and web3Modal)
+            <PrimarySpan>React-TypeScript-Web3</PrimarySpan> ( Web3.js, Web3-react and web3Modal )
           </p>
           <p>
-          <PrimarySpan>Redux setup</PrimarySpan> ( Libraries: Redux-toolkit && React-Redux)
+            <PrimarySpan>Redux</PrimarySpan> ( Redux-toolkit && React-Redux )
           </p>
           <p>
-          <PrimarySpan>Animation setup</PrimarySpan> ( Libraries: react-spring && react-canvas-draw)
+            <PrimarySpan>Animations </PrimarySpan> ( react-canvas-draw && react-spring(coming soon...) )
           </p>
         </b>
-        <Metamask />
-        <WalletConnect />
+        <ComponentWrap>
+          <Metamask />
+          <WalletConnect />
+        </ComponentWrap>
 
-        
-        <Canvas />
+        <ComponentWrap>
+          <Canvas />
+        </ComponentWrap>
+
 
         {/* <a
           className="App-link"

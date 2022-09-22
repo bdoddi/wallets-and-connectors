@@ -1,10 +1,10 @@
 import { useWeb3React } from '@web3-react/core'
 import React, { useEffect, useState } from 'react'
-import { tokenBalanceFunction } from '../helper/helper'
-import { NetworkName } from '../helper/networks'
-import { walletConnect } from '../helper/wallet'
-import { web3 } from '../helper/web3'
-import { GridComponent, PrimaryButton, SubHeading } from '../shared/styled'
+import { tokenBalanceFunction } from '../../helper/helper'
+import { NetworkName } from '../../helper/networks'
+import { walletConnect } from '../../helper/wallet'
+import { web3 } from '../../helper/web3'
+import { GridComponent, PrimaryButton, SubHeading } from '../../shared/styled'
 import { connect, disconnect } from './web3Connection'
 
 const WalletConnect = () => {
