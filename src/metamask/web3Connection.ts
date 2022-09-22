@@ -1,10 +1,11 @@
 import detectEthereumProvider from "@metamask/detect-provider";
 import { web3 } from "../helper/web3";
+import { setAccount } from "../logic/redux-toolkit/slices/web3WalletSlice";
 
 // const accounts = await web3.eth.getAccounts()
 // const balance = await web3.eth.getBalance(accounts[0])
 
-export const connectWallet = async () => {
+export const connectWallet = async (dispatch: any) => {
   const provider = await detectEthereumProvider();
   const { ethereum } = window;
 
@@ -28,6 +29,7 @@ export const connectWallet = async () => {
         console.log("chainChanged", newChainID, parseInt(newChainID));
         // accountInfo.chainId = parseInt(newChainID);
       });
+      dispatch(setAccount(accounts[0]))
       return accounts[0];
     }
   }

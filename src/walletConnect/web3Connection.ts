@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
-import { accountInfoInterface } from "../helper/interfaces";
+import { accountInfoInterface } from "../shared/interfaces/walletInterfaces";
 
 //  Create WalletConnect Provider
 const provider: any = new WalletConnectProvider({

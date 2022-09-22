@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { PrimarySpanInterface } from "./interfaces/styleInterfaces";
+import { Colors } from "./theme";
 
 export const GridComponent = styled.div`
   display: grid;
@@ -9,20 +11,25 @@ export const GridComponent = styled.div`
   }
 `;
 export const SubHeading = styled.h2`
-  color: #61dafb;
+  color: ${(props) => (props.color ? props.color : Colors.primaryColor)};
 `;
 export const PrimaryButton = styled.div`
   margin: 10px;
   padding: 10px;
   font-size: 18px;
-  background: #61dafb;
+  background: ${Colors.primaryColor};
   border: none;
   border-radius: 6px;
-  color: black;
+  color: ${(props) => (props.color ? props.color : Colors.backgroundColor)};
   cursor: pointer;
   width: 280px;
+  font-weight: 500;
   &:hover {
     font-size: 20px;
   }
   align-items: center;
+`;
+
+export const PrimarySpan = styled.span<PrimarySpanInterface>`
+  color: ${(props) => (props.color ? props.color : Colors.primaryColor)};
 `;

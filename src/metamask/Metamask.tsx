@@ -9,6 +9,7 @@ import { injected } from '../helper/wallet'
 import { tokenBalanceFunction } from '../helper/helper'
 import { web3 } from '../helper/web3'
 import { web3ModalConnect, web3ModalDisconnect } from './web3ModalConnection'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Metamask = () => {
     const [address, setAddress] = useState<string>('')
@@ -17,13 +18,15 @@ const Metamask = () => {
     const [modalAddress, setModalAddress] = useState<string>('')
     const [modalChainId, setModalChainId] = useState<number>(0)
     const [modalProvider, setModalProvider] = useState<any>('')
-    // const [clickedWeb]
+
+    const dispatch = useDispatch()
+    const { newAccount } = useSelector((state:any) => state.web3Wallet)
 
     const { account, activate, deactivate, chainId, active, library, connector } = useWeb3React()
-
+    console.log("newAccount", newAccount)
     const connectToWeb3 = async (type: string) => {
         if (!address) {
-            const account = await connectWallet()
+            const account = await connectWallet(dispatch)
             const network_Id = await returnNetworkId()
             setAddress(account)
             setNetworkId(network_Id)
@@ -82,7 +85,7 @@ const Metamask = () => {
                     {address ? "Diconnect" : "Connect"} Web3 Wallet
                 </PrimaryButton>
                 {address && <>
-                    <i>Address : {account}</i> <br />
+                    <i>Address : {address}</i> <br />
                     {networkId && <i>Network Name : {NetworkName(networkId)}</i>} <br />
                     <i>Chain ID: {networkId} </i> <br />
                     <i>Balance: {balance}</i> <br />

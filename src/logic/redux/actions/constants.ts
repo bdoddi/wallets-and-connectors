@@ -1,0 +1,1 @@
+export const ACCOUNT_ADDRESS = "ACCOUNT_ADDRESS";

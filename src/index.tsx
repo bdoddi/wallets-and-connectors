@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Web3ReactProvider } from "@web3-react/core";
+import { Provider } from 'react-redux'
 
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Web3 from 'web3';
 import { web3 } from './helper/web3';
+import store from './logic/redux-toolkit/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -20,9 +22,11 @@ const getLibrary = (provider: any) => {
 
 root.render(
   <React.StrictMode>
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <App />
-    </Web3ReactProvider>
+    <Provider store={store} >
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <App />
+      </Web3ReactProvider>
+    </Provider>
   </React.StrictMode>
 );
 
